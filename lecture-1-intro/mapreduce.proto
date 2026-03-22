@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package mapreduce;
+
+// RPCs exposed by each worker.
+service MapReduceService {
+    rpc Map(MapRequest) returns (MapReply);
+    rpc Reduce(ReduceRequest) returns (ReduceReply);
+}
+
+message MapRequest {
+    string data = 1;
+}
+
+message KeyValue {
+    string key = 1;
+    string value = 2;
+}
+
+message MapReply {
+    repeated KeyValue pairs = 1;
+}
+
+message ReduceRequest {
+    string key = 1;
+    repeated string values = 2;
+}
+
+message ReduceReply {
+    string key = 1;
+    string value = 2;
+}
